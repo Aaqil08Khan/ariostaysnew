@@ -1,20 +1,21 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { WHATSAPP_URL } from "@/data/villas";
 
 const links = [
-  { to: "/" as const, label: "Home" },
-  { to: "/villas" as const, label: "Villas" },
-  { to: "/about" as const, label: "About" },
-  { to: "/gallery" as const, label: "Gallery" },
-  { to: "/contact" as const, label: "Contact" },
-  { to: "/policies" as const, label: "Policies" },
+  { to: "/", label: "Home" },
+  { to: "/villas", label: "Villas" },
+  { to: "/about", label: "About" },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/contact", label: "Contact" },
+  { to: "/policies", label: "Policies" },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -23,6 +24,15 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  const isActive = (to: string) => {
+    if (to === "/") return location.pathname === "/";
+    return location.pathname.startsWith(to);
+  };
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
@@ -30,6 +40,7 @@ export function Navbar() {
           ? "bg-background/85 backdrop-blur-md border-b border-border/60 py-3"
           : "bg-transparent py-5"
       }`}
+      style={{ backgroundColor: scrolled ? "oklch(0.972 0.005 80 / 0.85)" : "transparent" }}
     >
       <div className="container-editorial flex items-center justify-between">
         <Logo />
@@ -39,12 +50,20 @@ export function Navbar() {
             <Link
               key={l.to}
               to={l.to}
-              className="group relative text-[13px] font-medium tracking-wide text-foreground/80 transition hover:text-navy"
-              activeProps={{ className: "text-navy" }}
-              activeOptions={{ exact: l.to === "/" }}
+              className="group relative text-[13px] font-medium tracking-wide transition hover:text-navy"
+              style={{
+                color: isActive(l.to) ? "var(--navy)" : "var(--foreground)",
+                opacity: 0.8,
+              }}
             >
               {l.label}
-              <span className="pointer-events-none absolute -bottom-1.5 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
+              <span
+                className="pointer-events-none absolute -bottom-1.5 left-0 h-px transition-all duration-300 group-hover:w-full"
+                style={{
+                  backgroundColor: "var(--gold)",
+                  width: isActive(l.to) ? "100%" : "0",
+                }}
+              />
             </Link>
           ))}
         </nav>
@@ -54,9 +73,14 @@ export function Navbar() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-[12px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-soft)] transition hover:bg-navy/90"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-medium uppercase tracking-[0.18em] transition hover:opacity-90"
+            style={{
+              backgroundColor: "var(--navy)",
+              color: "var(--primary-foreground)",
+              boxShadow: "var(--shadow-soft)",
+            }}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+            <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "var(--gold)" }} />
             Reserve
           </a>
         </div>
@@ -75,16 +99,18 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-border bg-background">
+        <div className="md:hidden border-t border-border" style={{ backgroundColor: "var(--background)" }}>
           <div className="container-editorial flex flex-col gap-1 py-4">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3 text-sm text-foreground/80 hover:bg-secondary"
-                activeProps={{ className: "text-navy bg-secondary" }}
-                activeOptions={{ exact: l.to === "/" }}
+                className="rounded-md px-3 py-3 text-sm hover:bg-secondary"
+                style={{
+                  color: isActive(l.to) ? "var(--navy)" : "var(--foreground)",
+                  opacity: 0.8,
+                  backgroundColor: isActive(l.to) ? "var(--secondary)" : undefined,
+                }}
               >
                 {l.label}
               </Link>
@@ -93,7 +119,8 @@ export function Navbar() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 rounded-full bg-navy px-5 py-3 text-center text-sm font-medium uppercase tracking-[0.15em] text-primary-foreground"
+              className="mt-2 rounded-full px-5 py-3 text-center text-sm font-medium uppercase tracking-[0.15em]"
+              style={{ backgroundColor: "var(--navy)", color: "var(--primary-foreground)" }}
             >
               Reserve on WhatsApp
             </a>
