@@ -36,11 +36,10 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled
           ? "bg-background/85 backdrop-blur-md border-b border-border/60 py-3"
           : "bg-transparent py-5"
-      }`}
+        }`}
       style={{ backgroundColor: "#f2ede7" }}
     >
       <div className="container-editorial flex items-center justify-between">
@@ -96,9 +95,23 @@ export function Navbar() {
           className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card"
         >
           <span className="relative block h-3 w-5">
-            <span className={`absolute left-0 top-0 h-px w-full bg-foreground transition ${open ? "translate-y-1.5 rotate-45" : ""}`} />
-            <span className={`absolute left-0 top-1.5 h-px w-full bg-foreground transition ${open ? "opacity-0" : ""}`} />
-            <span className={`absolute left-0 bottom-0 h-px w-full bg-foreground transition ${open ? "-translate-y-1.5 -rotate-45" : ""}`} />
+            <span
+              className={`absolute left-0 top-0 h-px w-full transition ${open ? "translate-y-1.5 rotate-45" : ""
+                }`}
+              style={{ backgroundColor: "var(--navy)" }}
+            />
+
+            <span
+              className={`absolute left-0 top-1.5 h-px w-full transition ${open ? "opacity-0" : ""
+                }`}
+              style={{ backgroundColor: "var(--navy)" }}
+            />
+
+            <span
+              className={`absolute left-0 bottom-0 h-px w-full transition ${open ? "-translate-y-1.5 -rotate-45" : ""
+                }`}
+              style={{ backgroundColor: "var(--navy)" }}
+            />
           </span>
         </button>
       </div>

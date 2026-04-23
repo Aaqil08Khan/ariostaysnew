@@ -52,9 +52,9 @@ useEffect(() => {
           <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(33,44,80,0.3)" }} />
 
-          <div className="container-editorial relative z-10 flex h-full flex-col justify-end pb-20 pt-40">
+          <div className="container-editorial relative z-10 flex h-full flex-col justify-center md:justify-end pt-28 md:pt-40 pb-16 md:pb-20">
             <div className="max-w-3xl animate-fade-up">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-gold">Curated Luxury Stays</p>
+              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gold whitespace-nowrap">Curated Luxury Stays</p>
               <h1 className="mt-6 text-balance font-serif text-5xl font-medium leading-[1.02] text-white md:text-7xl lg:text-[88px]">
                 Beautifully kept estates,
                 <span className="block italic text-white/85">made for slow days.</span>
