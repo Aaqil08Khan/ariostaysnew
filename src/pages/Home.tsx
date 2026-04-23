@@ -18,8 +18,8 @@ export default function Home() {
   return (
     <Layout>
       {/* HERO */}
-      <section className="relative ">
-        <div className="relative h-[92vh] min-h-[640px] w-full overflow-hidden">
+      <section className="relative -mt-24 md:-mt-8">
+        <div className="relative h-[92vh] min-h-160 w-full overflow-hidden">
           <video
             autoPlay
             muted

@@ -40,7 +40,7 @@ export function Navbar() {
           ? "bg-background/85 backdrop-blur-md border-b border-border/60 py-3"
           : "bg-transparent py-5"
       }`}
-      style={{ backgroundColor: scrolled ? "oklch(0.972 0.005 80 / 0.85)" : "transparent" }}
+      style={{ backgroundColor: scrolled ? "#f2ede7" : "#f2ede7" }}
     >
       <div className="container-editorial flex items-center justify-between">
         <Logo />

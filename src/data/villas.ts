@@ -1,3 +1,31 @@
+import vr1 from "../assets/villas/Vrindavan — The Villa/vr1.jpeg"
+import vr2 from "../assets/villas/Vrindavan — The Villa/vr2.jpeg"
+import vr3 from "../assets/villas/Vrindavan — The Villa/vr3.jpeg"
+import vr4 from "../assets/villas/Vrindavan — The Villa/vr4.jpeg"
+import kh1 from "../assets/villas/kerela house/kh1.jpeg"
+import kh2 from "../assets/villas/kerela house/kh2.jpeg"
+import kh3 from "../assets/villas/kerela house/kh3.jpeg"
+import kh4 from "../assets/villas/kerela house/kh4.jpeg"
+import pp1 from "../assets/villas/Purple Palms Villa/pp1.jpeg"
+import pp2 from "../assets/villas/Purple Palms Villa/pp2.jpeg"
+import pp3 from "../assets/villas/Purple Palms Villa/pp3.jpeg"
+import pp4 from "../assets/villas/Purple Palms Villa/pp4.jpeg"
+import ch1 from "../assets/villas/Chandravaas — The Haveli/ch1.jpeg"
+import ch2 from "../assets/villas/Chandravaas — The Haveli/ch2.jpeg"
+import ch3 from "../assets/villas/Chandravaas — The Haveli/ch3.jpeg"
+import ch4 from "../assets/villas/Chandravaas — The Haveli/ch4.jpeg"
+import ar1 from "../assets/villas/Ario Mango Retreat/ar1.jpeg"
+import ar2 from "../assets/villas/Ario Mango Retreat/ar2.jpeg"
+import ar3 from "../assets/villas/Ario Mango Retreat/ar3.jpeg"
+import ar4 from "../assets/villas/Ario Mango Retreat/ar4.jpeg"
+import pf1 from "../assets/villas/pearl-farm-stay/pf1.jpeg"
+import pf2 from "../assets/villas/pearl-farm-stay/pf2.jpeg"
+import pf3 from "../assets/villas/pearl-farm-stay/pf3.jpeg"
+import pf4 from "../assets/villas/pearl-farm-stay/pf4.jpeg"
+import li1 from "../assets/villas/lilac-inn/li1.jpeg"
+import li2 from "../assets/villas/lilac-inn/li2.jpeg"
+import li3 from "../assets/villas/lilac-inn/li3.jpeg"
+import li4 from "../assets/villas/lilac-inn/li4.jpeg"
 export type Villa = {
   name: string;
   slug: string;
@@ -37,17 +65,15 @@ export const villas: Villa[] = [
       "On-site caretaker",
       "Pre-order food service",
     ],
-    mapLink: "https://maps.app.goo.gl/WzSLN2mMw2e1NQzBA",
-    mapEmbed: "https://www.google.com/maps?q=Shamshabad+Hyderabad&output=embed",
+    mapLink: "https://www.google.com/maps?q=17.2403,78.4294",
+    mapEmbed: "https://www.google.com/maps?q=17.2403,78.4294&output=embed",
     price: 24999,
     capacity: "Up to 12 guests",
     bedrooms: 3,
     category: ["Family", "Party"],
     images: [
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&q=80",
-      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80",
+      vr1, vr2, vr3, vr4
+
     ],
   },
   {
@@ -68,17 +94,14 @@ export const villas: Villa[] = [
       "Linen bedding",
       "Bluetooth speaker",
     ],
-    mapLink: "https://maps.app.goo.gl/DzwQTzE9gKWdVpPPA",
-    mapEmbed: "https://www.google.com/maps?q=Hyderabad+Kerala+House&output=embed",
+    mapLink: "https://www.google.com/maps?q=17.3850,78.4867",
+    mapEmbed: "https://www.google.com/maps?q=17.3850,78.4867&output=embed",
     price: 18999,
     capacity: "Up to 6 guests",
     bedrooms: 2,
     category: ["Romantic", "Family"],
     images: [
-      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80",
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600&q=80",
-      "https://images.unsplash.com/photo-1571508601891-ca5e7a713859?w=1600&q=80",
-      "https://images.unsplash.com/photo-1551776235-dde6d482980b?w=1600&q=80",
+      kh1, kh2, kh3, kh4
     ],
   },
   {
@@ -107,10 +130,7 @@ export const villas: Villa[] = [
     bedrooms: 3,
     category: ["Party", "Family"],
     images: [
-      "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=1600&q=80",
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1600&q=80",
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80",
+      pp1, pp2, pp3, pp4
     ],
   },
   {
@@ -128,17 +148,15 @@ export const villas: Villa[] = [
       "Traditional courtyards",
       "Curated interiors",
     ],
-    mapLink: "https://maps.app.goo.gl/cG611ycfuKqVA8p68",
-    mapEmbed: "https://www.google.com/maps?q=Telangana+Haveli&output=embed",
+    mapLink: "https://www.google.com/maps?q=17.123184,79.208824",
+    mapEmbed: "https://www.google.com/maps?q=17.123184,79.208824&output=embed",
     price: 29999,
     capacity: "Up to 16 guests",
     bedrooms: 4,
     category: ["Heritage", "Family"],
     images: [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80",
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1600&q=80",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&q=80",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1600&q=80",
+      ch1, ch2, ch3, ch4
+
     ],
   },
   {
@@ -157,19 +175,69 @@ export const villas: Villa[] = [
       "Event-friendly space",
       "Ideal for celebrations & stays",
     ],
-    mapLink: "https://maps.app.goo.gl/",
-    mapEmbed: "https://www.google.com/maps?q=Mango+Orchards+Hyderabad&output=embed",
+    mapLink: "https://www.google.com/maps?q=17.3000,78.3000",
+    mapEmbed: "https://www.google.com/maps?q=17.3000,78.3000&output=embed",
     price: 49999,
     capacity: "Up to 30 guests",
     bedrooms: 6,
     category: ["Events", "Party"],
     images: [
-      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80",
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1600&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80",
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&q=80",
+      ar1, ar2, ar3, ar4
     ],
   },
+  {
+    name: "Pearl Farm Stay",
+    slug: "pearl-farm-stay",
+    location: "Moinabad, Hyderabad",
+    shortLocation: "Moinabad",
+    tagline: "Open lawns. Quiet escapes. Simple comfort.",
+    description:
+      "A peaceful 2BHK farmhouse ideal for relaxed getaways. With a private pool, expansive lawn, and essential comforts, Pearl Farm Stay is perfect for small gatherings, family stays, and slow weekends close to nature.",
+    amenities: [
+      "2BHK",
+      "Swimming pool",
+      "Huge lawn",
+      "Equipped kitchen",
+      "On-site caretaker",
+    ],
+    mapLink: "https://www.google.com/maps?q=17.3011726,78.1968873",
+    mapEmbed: "https://www.google.com/maps?q=17.3011726,78.1968873&output=embed",
+    price: 15999, // you can adjust
+    capacity: "Up to 8 guests",
+    bedrooms: 2,
+    category: ["Family", "Party"],
+    images: [
+      pf1, pf2, pf3, pf4
+    ],
+  },
+  {
+    name: "Lilac Inn",
+    slug: "lilac-inn",
+    location: "Moinabad, Hyderabad",
+    shortLocation: "Moinabad",
+    tagline: "Elegant stays. Even better evenings.",
+    description:
+      "A fully air-conditioned 4BHK farmhouse in Moinabad featuring a pool, rooftop terrace, and spacious garden. Ideal for group stays, celebrations, and relaxed evenings with music, BBQ, and bonfire experiences.",
+    amenities: [
+      "4BHK fully air-conditioned",
+      "Swimming pool",
+      "Garden area",
+      "Rooftop terrace",
+      "BBQ setup",
+      "Bonfire (on request)",
+      "Music system",
+    ],
+    mapLink: "https://www.google.com/maps?q=17.2926882,78.2286994",
+    mapEmbed: "https://www.google.com/maps?q=17.2926882,78.2286994&output=embed",
+    price: 21999, // adjust if needed
+    capacity: "Up to 12 guests",
+    bedrooms: 4,
+    category: ["Party", "Events", "Family"],
+    images: [
+      li1, li2, li3, li4
+    ],
+  },
+
 ];
 
 export const getVilla = (slug: string) => villas.find((v) => v.slug === slug);

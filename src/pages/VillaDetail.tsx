@@ -46,7 +46,7 @@ export default function VillaDetail() {
         {/* Image Gallery */}
         <div className="mt-6 grid gap-3 md:grid-cols-12 md:gap-4">
           <div className="md:col-span-8">
-            <div className="aspect-[4/3] overflow-hidden rounded-3xl bg-secondary md:aspect-[16/10]">
+            <div className="aspect-[4/3] overflow-hidden rounded-3xl bg-secondary md:aspect-16/10">
               <img
                 src={villa.images[active]}
                 alt={villa.name}
@@ -133,7 +133,7 @@ export default function VillaDetail() {
                 <iframe
                   title={`${villa.name} location`}
                   src={villa.mapEmbed}
-                  className="h-[360px] w-full"
+                  className="h-90 w-full"
                   loading="lazy"
                 />
               </div>
@@ -150,7 +150,7 @@ export default function VillaDetail() {
 
           {/* Sticky Booking Card */}
           <aside className="md:col-span-5">
-            <div className="sticky top-28 rounded-3xl border border-border bg-card p-7 shadow-[var(--shadow-soft)]">
+            <div className="sticky top-28 rounded-3xl border border-border bg-card p-7 shadow(--shadow-soft)">
               <p className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
                 Starting from
               </p>

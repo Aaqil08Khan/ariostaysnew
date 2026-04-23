@@ -36,11 +36,12 @@ export default function VillasPage() {
             <button
               key={f}
               onClick={() => setActive(f)}
-              className={`rounded-full px-4 py-2 text-[12px] uppercase tracking-[0.18em] transition ${
-                active === f
-                  ? "bg-navy text-primary-foreground"
-                  : "bg-transparent text-foreground/70 hover:bg-secondary"
-              }`}
+              className="rounded-full px-4 py-2 text-[12px] uppercase tracking-[0.18em] transition"
+              style={{
+                backgroundColor: active === f ? "var(--navy)" : "transparent",
+                color: active === f ? "var(--primary-foreground)" : "var(--foreground)",
+                opacity: active === f ? 1 : 0.7,
+              }}
             >
               {f}
             </button>
