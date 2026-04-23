@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
 import { getVilla, villas, WHATSAPP_URL } from "@/data/villas";
 
@@ -10,21 +10,23 @@ export default function VillaDetail() {
 
   useEffect(() => {
     if (villa) document.title = `${villa.name} — Ario Stays`;
-    // Reset image selection when slug changes
     setActive(0);
+    // Fix 2: always start at the top when the page loads or slug changes
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [villa, slug]);
 
-  // Redirect to /villas if slug doesn't match any villa
+  // Not found state
   if (!villa) {
     return (
       <Layout>
         <section className="container-editorial">
           <h1 className="font-serif text-4xl text-navy">Villa not found</h1>
+          {/* Fix 1: redirect to /properties */}
           <Link
-            to="/villas"
+            to="/properties"
             className="mt-6 inline-block text-sm uppercase tracking-[0.18em] text-navy underline"
           >
-            Back to all villas
+            Back to all properties
           </Link>
         </section>
       </Layout>
@@ -36,11 +38,12 @@ export default function VillaDetail() {
   return (
     <Layout>
       <section className="container-editorial">
+        {/* Fix 1: back button → /properties */}
         <Link
-          to="/villas"
+          to="/properties"
           className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-muted-foreground hover:text-navy transition-colors"
         >
-          ← Back to all villas
+          ← Back to all properties
         </Link>
 
         {/* Image Gallery */}
@@ -186,12 +189,13 @@ export default function VillaDetail() {
           </aside>
         </div>
 
-        {/* More Villas */}
+        {/* More from the collection */}
         <div className="mt-32 border-t border-border pt-16">
           <div className="flex items-end justify-between gap-6">
             <h2 className="font-serif text-3xl text-navy md:text-4xl">More from the collection</h2>
+            {/* Fix 1: "View all" → /properties */}
             <Link
-              to="/villas"
+              to="/properties"
               className="hidden text-xs uppercase tracking-[0.18em] text-navy underline md:inline"
             >
               View all →

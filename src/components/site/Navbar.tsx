@@ -5,9 +5,8 @@ import { WHATSAPP_URL } from "@/data/villas";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/villas", label: "Villas" },
+  { to: "/properties", label: "Properties" },
   { to: "/about", label: "About" },
-  { to: "/gallery", label: "Gallery" },
   { to: "/contact", label: "Contact" },
   { to: "/policies", label: "Policies" },
 ];

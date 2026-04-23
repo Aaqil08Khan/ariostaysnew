@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
 import { villas, WHATSAPP_URL, INSTAGRAM } from "@/data/villas";
+import { BookingForm } from "../components/site/BookingFrom";
 
 const categories = ["All", "Party", "Family", "Romantic", "Heritage", "Events"] as const;
 
@@ -49,7 +50,7 @@ export default function Home() {
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link
-                  to="/villas"
+                  to="/properties"
                   className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[12px] font-medium uppercase tracking-[0.2em] text-navy transition hover:bg-gold hover:text-navy"
                 >
                   Explore Villas →
@@ -67,7 +68,7 @@ export default function Home() {
 
             <div className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-white/15 pt-6 text-white/85">
               <div>
-                <p className="font-serif text-3xl text-white">5</p>
+                <p className="font-serif text-3xl text-white">9</p>
                 <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-white/60">Private Estates</p>
               </div>
               <div>
@@ -89,7 +90,7 @@ export default function Home() {
           <div className="md:col-span-5">
             <p className="text-[11px] uppercase tracking-[0.3em] text-gold">The Ario Way</p>
             <h2 className="mt-4 font-serif text-4xl font-medium leading-[1.1] text-navy md:text-5xl">
-              Five homes. <span className="italic text-foreground/60">One quiet philosophy.</span>
+              Nine homes. <span className="italic text-foreground/60">One quiet philosophy.</span>
             </h2>
           </div>
           <div className="md:col-span-7">
@@ -106,7 +107,7 @@ export default function Home() {
       <section className="mt-24">
         <div className="container-editorial flex items-end justify-between">
           <h2 className="font-serif text-3xl text-navy md:text-4xl">The Collection</h2>
-          <Link to="/villas" className="text-xs uppercase tracking-[0.18em] text-navy underline">
+          <Link to="/properties" className="text-xs uppercase tracking-[0.18em] text-navy underline">
             View all →
           </Link>
         </div>
@@ -143,16 +144,23 @@ export default function Home() {
             <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Featured Stays</p>
             <h2 className="mt-4 font-serif text-4xl text-navy md:text-5xl">Find your kind of getaway.</h2>
           </div>
+
+          {/* ✅ FIX: use inline styles so CSS variables resolve correctly */}
           <div className="flex flex-wrap gap-2">
             {categories.map((c) => (
               <button
                 key={c}
                 onClick={() => setCat(c)}
-                className={`rounded-full px-4 py-2 text-[12px] uppercase tracking-[0.18em] transition ${
-                  cat === c
-                    ? "bg-navy text-primary-foreground"
-                    : "bg-secondary text-foreground/70 hover:bg-secondary/70"
-                }`}
+                className="rounded-full px-4 py-2 text-[12px] uppercase tracking-[0.18em] transition-all duration-200"
+                style={{
+                  backgroundColor: cat === c ? "var(--navy)" : "transparent",
+                  color: cat === c ? "var(--primary-foreground)" : "var(--foreground)",
+                  border: cat === c
+                    ? "1.5px solid var(--navy)"
+                    : "1.5px solid var(--border)",
+                  fontWeight: cat === c ? 600 : 400,
+                  opacity: cat === c ? 1 : 0.65,
+                }}
               >
                 {c}
               </button>
@@ -237,6 +245,42 @@ export default function Home() {
                 <div className="absolute inset-0 bg-navy/0 transition group-hover:bg-navy/30" />
               </a>
             ))}
+        </div>
+      </section>
+
+      {/* BOOKING FORM */}
+      <section className="container-editorial mt-32">
+        <div className="grid gap-12 rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)] md:grid-cols-12 md:p-14">
+          {/* Left heading */}
+          <div className="md:col-span-4">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Reserve your stay</p>
+            <h2 className="mt-4 font-serif text-4xl font-medium leading-tight text-navy md:text-5xl">
+              Book a villa{" "}
+              <span className="italic text-foreground/60">in minutes.</span>
+            </h2>
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              Fill in your dates and we'll confirm availability on WhatsApp — usually within 2 hours.
+            </p>
+            <div className="mt-8 space-y-3 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+                Instant WhatsApp confirmation
+              </div>
+              <div className="flex items-center gap-2.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+                On-site caretaker at every property
+              </div>
+              <div className="flex items-center gap-2.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+                Custom meals available on request
+              </div>
+            </div>
+          </div>
+
+          {/* Right form */}
+          <div className="md:col-span-8">
+            <BookingForm />
+          </div>
         </div>
       </section>
 

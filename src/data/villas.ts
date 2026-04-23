@@ -26,6 +26,17 @@ import li1 from "../assets/villas/lilac-inn/li1.jpeg"
 import li2 from "../assets/villas/lilac-inn/li2.jpeg"
 import li3 from "../assets/villas/lilac-inn/li3.jpeg"
 import li4 from "../assets/villas/lilac-inn/li4.jpeg"
+// ─── Rockdale Inn ───────────────────────────────────────────────────────────
+import rd1 from "../assets/villas/rockdale-inn/rd1.jpeg"
+import rd2 from "../assets/villas/rockdale-inn/rd2.jpeg"
+import rd3 from "../assets/villas/rockdale-inn/rd3.jpeg"
+import rd4 from "../assets/villas/rockdale-inn/rd4.jpeg"
+// ─── Kaizen Farms ───────────────────────────────────────────────────────────
+import kz1 from "../assets/villas/kaizen-farms/kz1.jpeg"
+import kz2 from "../assets/villas/kaizen-farms/kz2.jpeg"
+import kz3 from "../assets/villas/kaizen-farms/kz3.jpeg"
+import kz4 from "../assets/villas/kaizen-farms/kz4.jpeg"
+
 export type Villa = {
   name: string;
   slug: string;
@@ -71,10 +82,7 @@ export const villas: Villa[] = [
     capacity: "Up to 12 guests",
     bedrooms: 3,
     category: ["Family", "Party"],
-    images: [
-      vr1, vr2, vr3, vr4
-
-    ],
+    images: [vr1, vr2, vr3, vr4],
   },
   {
     name: "Kerala House",
@@ -100,9 +108,7 @@ export const villas: Villa[] = [
     capacity: "Up to 6 guests",
     bedrooms: 2,
     category: ["Romantic", "Family"],
-    images: [
-      kh1, kh2, kh3, kh4
-    ],
+    images: [kh1, kh2, kh3, kh4],
   },
   {
     name: "Purple Palms Villa",
@@ -129,9 +135,7 @@ export const villas: Villa[] = [
     capacity: "Up to 14 guests",
     bedrooms: 3,
     category: ["Party", "Family"],
-    images: [
-      pp1, pp2, pp3, pp4
-    ],
+    images: [pp1, pp2, pp3, pp4],
   },
   {
     name: "Chandravaas — The Haveli",
@@ -154,10 +158,7 @@ export const villas: Villa[] = [
     capacity: "Up to 16 guests",
     bedrooms: 4,
     category: ["Heritage", "Family"],
-    images: [
-      ch1, ch2, ch3, ch4
-
-    ],
+    images: [ch1, ch2, ch3, ch4],
   },
   {
     name: "Ario Mango Retreat — The Royal Cottage",
@@ -181,9 +182,7 @@ export const villas: Villa[] = [
     capacity: "Up to 30 guests",
     bedrooms: 6,
     category: ["Events", "Party"],
-    images: [
-      ar1, ar2, ar3, ar4
-    ],
+    images: [ar1, ar2, ar3, ar4],
   },
   {
     name: "Pearl Farm Stay",
@@ -202,13 +201,11 @@ export const villas: Villa[] = [
     ],
     mapLink: "https://www.google.com/maps?q=17.3011726,78.1968873",
     mapEmbed: "https://www.google.com/maps?q=17.3011726,78.1968873&output=embed",
-    price: 15999, // you can adjust
+    price: 15999,
     capacity: "Up to 8 guests",
     bedrooms: 2,
     category: ["Family", "Party"],
-    images: [
-      pf1, pf2, pf3, pf4
-    ],
+    images: [pf1, pf2, pf3, pf4],
   },
   {
     name: "Lilac Inn",
@@ -229,15 +226,64 @@ export const villas: Villa[] = [
     ],
     mapLink: "https://www.google.com/maps?q=17.2926882,78.2286994",
     mapEmbed: "https://www.google.com/maps?q=17.2926882,78.2286994&output=embed",
-    price: 21999, // adjust if needed
+    price: 21999,
     capacity: "Up to 12 guests",
     bedrooms: 4,
     category: ["Party", "Events", "Family"],
-    images: [
-      li1, li2, li3, li4
-    ],
+    images: [li1, li2, li3, li4],
   },
-
+  {
+    name: "Rockdale Inn",
+    slug: "rockdale-inn",
+    location: "Kachivani Singaram, Rangareddy",
+    shortLocation: "Rangareddy",
+    tagline: "Lush greens. Cool pool. Zero noise.",
+    description:
+      "Tucked away in the serene outskirts of Rangareddy, Rockdale Inn is a spacious farmhouse retreat offering everything you need for a comfortable, unplugged escape. With air-conditioned rooms, a sparkling private pool, a lush lawn, and a fully equipped kitchen, it's built for groups who want comfort without compromise. A power-backed setup ensures uninterrupted stays.",
+    amenities: [
+      "Air conditioning",
+      "Private pool",
+      "Expansive lawn",
+      "Equipped kitchen",
+      "Fridge & microwave",
+      "Bluetooth speaker",
+      "Power backup",
+      "Free parking",
+    ],
+    mapLink: "https://www.google.com/maps?q=17.3560,78.2100",
+    mapEmbed: "https://www.google.com/maps?q=17.3560,78.2100&output=embed",
+    price: 19999,
+    capacity: "Up to 10 guests",
+    bedrooms: 4,
+    category: ["Family", "Party"],
+    images: [rd1, rd2, rd3, rd4],
+  },
+  {
+    name: "Kaizen Farms",
+    slug: "kaizen-farms",
+    location: "Moinabad, Hyderabad",
+    shortLocation: "Moinabad",
+    tagline: "Designed for couples. Built for quiet.",
+    description:
+      "A charming and intimate 1BHK farmhouse in the tranquil surrounds of Moinabad — crafted for couples and small families seeking a slow, private escape. With a beautiful swimming pool, a generous lawn, air conditioning, and a dedicated on-site caretaker, Kaizen Farms keeps things simple, personal, and deeply relaxing. No events, no noise — just you and the countryside.",
+    amenities: [
+      "1BHK",
+      "Private swimming pool",
+      "Lawn area",
+      "Air conditioning",
+      "On-site caretaker",
+      "Free parking",
+      "Pet friendly",
+      "Wi-Fi",
+    ],
+    mapLink: "https://www.google.com/maps?q=17.2850,78.1800",
+    mapEmbed: "https://www.google.com/maps?q=17.2850,78.1800&output=embed",
+    price: 11999,
+    capacity: "Up to 4 guests",
+    bedrooms: 1,
+    category: ["Romantic", "Family"],
+    images: [kz1, kz2, kz3, kz4],
+  },
 ];
 
 export const getVilla = (slug: string) => villas.find((v) => v.slug === slug);

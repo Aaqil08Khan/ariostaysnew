@@ -6,17 +6,19 @@ import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Policies from "./pages/Policies";
+import Properties from "./pages/Properties";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/villas" element={<Villas />} />
+      {/* <Route path="/villas" element={<Villas />} /> */}
       <Route path="/villas/:slug" element={<VillaDetail />} />
       <Route path="/about" element={<About />} />
-      <Route path="/gallery" element={<Gallery />} />
+      {/* <Route path="/gallery" element={<Gallery />} /> */}
       <Route path="/contact" element={<Contact />} />
       <Route path="/policies" element={<Policies />} />
+      <Route path="/properties" element={<Properties />} />
     </Routes>
   );
 }
