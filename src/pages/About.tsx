@@ -36,7 +36,7 @@ export default function AboutPage() {
 
             <div className="mt-10">
               <Link
-                to="/villas"
+                to="/properties"
                 className="inline-flex items-center gap-2 border-b border-navy pb-1 text-sm uppercase tracking-[0.18em] text-navy transition hover:border-gold hover:text-gold"
               >
                 Explore the collection →

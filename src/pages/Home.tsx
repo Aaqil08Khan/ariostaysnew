@@ -3,10 +3,25 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
 import { villas, WHATSAPP_URL, INSTAGRAM } from "@/data/villas";
 import { BookingForm } from "../components/site/BookingFrom";
+import { useLocation } from "react-router-dom";
 
 const categories = ["All", "Party", "Family", "Romantic", "Heritage", "Events"] as const;
 
 export default function Home() {
+
+const location = useLocation();
+
+useEffect(() => {
+  if (location.hash === "#booking") {
+    const el = document.getElementById("booking");
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }
+}, [location]);
+
   const [cat, setCat] = useState<(typeof categories)[number]>("All");
 
   useEffect(() => {
@@ -55,14 +70,16 @@ export default function Home() {
                 >
                   Explore Villas →
                 </Link>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-[12px] font-medium uppercase tracking-[0.2em] text-white backdrop-blur transition hover:bg-white/10"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Plan your stay
-                </a>
+                <button
+  onClick={() => {
+    const el = document.getElementById("booking");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }}
+  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-[12px] font-medium uppercase tracking-[0.2em] text-white backdrop-blur transition hover:bg-white/10"
+>
+  <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+  Plan your stay
+</button>
               </div>
             </div>
 
@@ -249,7 +266,7 @@ export default function Home() {
       </section>
 
       {/* BOOKING FORM */}
-      <section className="container-editorial mt-32">
+      <section id="booking" className="container-editorial mt-32">
         <div className="grid gap-12 rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-soft)] md:grid-cols-12 md:p-14">
           {/* Left heading */}
           <div className="md:col-span-4">
