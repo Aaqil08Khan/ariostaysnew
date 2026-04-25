@@ -34,38 +34,50 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* HERO */}
-      <section className="relative -mt-24 md:-mt-8">
-        {/*
-          Mobile:  75vh — keeps hero from being overwhelmingly tall on portrait phones.
-          Desktop: 92vh — full cinematic height.
-          objectPosition: "center center" keeps the focal point of the landscape image
-          visible when cropped into the taller portrait mobile viewport.
-        */}
-        <div className="relative h-[75vh] min-h-[520px] w-full overflow-hidden md:h-[92vh] md:min-h-[600px]">
+      {/* ─── HERO ───────────────────────────────────────────────────────────
+          Layout gives <main> pt-24 (96px mobile) / pt-28 (112px desktop).
+
+          Mobile  : hero sits BELOW the navbar in normal flow — no negative margin.
+                    Height = 100svh minus navbar height so it fills the visible screen.
+
+          Desktop : pull the section UP by -mt-28 so it slides behind the fixed
+                    navbar for the full-bleed cinema look. The inner content gets
+                    pt-36 to clear the navbar before the text starts.
+      ──────────────────────────────────────────────────────────────────── */}
+      <section className="relative md:-mt-28">
+        {/* Mobile height: fill whatever is left below the navbar */}
+        {/* Desktop height: full 92vh cinematic */}
+        <div className="relative h-[calc(100svh-96px)] w-full overflow-hidden md:h-[92vh] md:min-h-[600px]">
           <img
             src={heroBg}
             alt="Ario Stays"
             className="absolute inset-0 h-full w-full object-cover animate-hero-kenburns"
-            style={{ objectPosition: "center center" }}
+            style={{ objectPosition: "center 40%" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/15" />
 
-          <div className="container-editorial relative z-10 flex h-full flex-col justify-end pb-14 md:pb-20">
+          {/* Content column — bottom-anchored on both mobile and desktop.
+              Desktop gets extra top padding so it never collides with navbar. */}
+          <div className="container-editorial relative z-10 flex h-full flex-col justify-end pb-10 md:pb-20">
             <div className="max-w-3xl animate-fade-up">
-              <p className="text-[11px] uppercase tracking-[0.25em] text-gold" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.4)" }}>Curated Luxury Stays</p>
-              <h1 className="mt-6 text-balance font-serif text-4xl font-medium leading-[1.02] text-white sm:text-5xl md:text-7xl lg:text-[88px]">
+              <p
+                className="text-[11px] uppercase tracking-[0.25em] text-gold"
+                style={{ textShadow: "0 1px 10px rgba(0,0,0,0.7)" }}
+              >
+                Curated Luxury Stays
+              </p>
+              <h1 className="mt-4 text-balance font-serif text-[clamp(1.75rem,6vw,5.5rem)] font-medium leading-[1.05] text-white">
                 Beautifully kept estates,
                 <span className="block italic text-white/85">made for slow days.</span>
               </h1>
-              <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/80 md:mt-7 md:text-base lg:text-lg">
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80 md:mt-6 md:text-base lg:text-lg">
                 A small collection of private villas and farmhouses — for weekends that breathe,
                 gatherings that linger, and celebrations worth remembering.
               </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3 md:mt-9 md:gap-4">
+              <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-8 md:gap-4">
                 <Link
                   to="/properties"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[11px] font-medium uppercase tracking-[0.2em] text-navy transition hover:bg-gold hover:text-navy md:px-7 md:py-3.5 md:text-[12px]"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.2em] text-navy transition hover:bg-gold hover:text-navy md:px-7 md:py-3.5 md:text-[12px]"
                 >
                   Explore Villas →
                 </Link>
@@ -74,7 +86,7 @@ export default function Home() {
                     const el = document.getElementById("booking");
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-[11px] font-medium uppercase tracking-[0.2em] text-white backdrop-blur transition hover:bg-white/10 md:px-7 md:py-3.5 md:text-[12px]"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white backdrop-blur transition hover:bg-white/10 md:px-7 md:py-3.5 md:text-[12px]"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-gold" />
                   Plan your stay
@@ -82,18 +94,18 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mt-10 grid max-w-2xl grid-cols-3 gap-4 border-t border-white/15 pt-5 text-white/85 md:mt-16 md:gap-6 md:pt-6">
+            <div className="mt-6 grid max-w-2xl grid-cols-3 gap-3 border-t border-white/15 pt-4 md:mt-14 md:gap-6 md:pt-6">
               <div>
-                <p className="font-serif text-2xl text-white md:text-3xl">9</p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/60 md:text-[10px] md:tracking-[0.25em]">Private Estates</p>
+                <p className="font-serif text-xl text-white md:text-3xl">9</p>
+                <p className="mt-0.5 text-[9px] uppercase tracking-[0.15em] text-white/60 md:text-[10px] md:tracking-[0.25em]">Private Estates</p>
               </div>
               <div>
-                <p className="font-serif text-2xl text-white md:text-3xl">200+</p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/60 md:text-[10px] md:tracking-[0.25em]">Guests Hosted</p>
+                <p className="font-serif text-xl text-white md:text-3xl">200+</p>
+                <p className="mt-0.5 text-[9px] uppercase tracking-[0.15em] text-white/60 md:text-[10px] md:tracking-[0.25em]">Guests Hosted</p>
               </div>
               <div>
-                <p className="font-serif text-2xl text-white md:text-3xl">24/7</p>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/60 md:text-[10px] md:tracking-[0.25em]">Concierge Care</p>
+                <p className="font-serif text-xl text-white md:text-3xl">24/7</p>
+                <p className="mt-0.5 text-[9px] uppercase tracking-[0.15em] text-white/60 md:text-[10px] md:tracking-[0.25em]">Concierge Care</p>
               </div>
             </div>
           </div>
@@ -142,10 +154,7 @@ export default function Home() {
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-              {/* Color tint (brand feel) */}
               <div
                 className="absolute inset-0"
                 style={{ backgroundColor: "rgba(33,44,80,0.35)" }}
