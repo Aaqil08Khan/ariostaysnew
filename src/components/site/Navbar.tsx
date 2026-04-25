@@ -12,7 +12,7 @@ const links = [
 ];
 
 export function Navbar() {
-  const goToBooking = useBookingScroll(); // ✅ ONLY this
+  const goToBooking = useBookingScroll();
 
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -29,6 +29,16 @@ export function Navbar() {
     setOpen(false);
   }, [location.pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   const isActive = (to: string) => {
     if (to === "/") return location.pathname === "/";
     return location.pathname.startsWith(to);
@@ -36,17 +46,18 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled
           ? "bg-background/85 backdrop-blur-md border-b border-border/60 py-3"
           : "bg-transparent py-5"
-        }`}
+      }`}
       style={{ backgroundColor: "#f2ede7" }}
     >
       <div className="container-editorial flex items-center justify-between">
         <Logo />
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-9 md:flex">
+        <nav className="hidden items-center gap-7 md:flex lg:gap-9">
           {links.map((l) => (
             <Link
               key={l.to}
@@ -96,20 +107,21 @@ export function Navbar() {
         >
           <span className="relative block h-3 w-5">
             <span
-              className={`absolute left-0 top-0 h-px w-full transition ${open ? "translate-y-1.5 rotate-45" : ""
-                }`}
+              className={`absolute left-0 top-0 h-px w-full transition ${
+                open ? "translate-y-1.5 rotate-45" : ""
+              }`}
               style={{ backgroundColor: "var(--navy)" }}
             />
-
             <span
-              className={`absolute left-0 top-1.5 h-px w-full transition ${open ? "opacity-0" : ""
-                }`}
+              className={`absolute left-0 top-1.5 h-px w-full transition ${
+                open ? "opacity-0" : ""
+              }`}
               style={{ backgroundColor: "var(--navy)" }}
             />
-
             <span
-              className={`absolute left-0 bottom-0 h-px w-full transition ${open ? "-translate-y-1.5 -rotate-45" : ""
-                }`}
+              className={`absolute left-0 bottom-0 h-px w-full transition ${
+                open ? "-translate-y-1.5 -rotate-45" : ""
+              }`}
               style={{ backgroundColor: "var(--navy)" }}
             />
           </span>
@@ -118,7 +130,10 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden border-t border-border" style={{ backgroundColor: "var(--background)" }}>
+        <div
+          className="md:hidden border-t border-border"
+          style={{ backgroundColor: "var(--background)" }}
+        >
           <div className="container-editorial flex flex-col gap-1 py-4">
             {links.map((l) => (
               <Link

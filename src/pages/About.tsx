@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
+import aboutBG from "../assets/villas/Vrindavan — The Villa/img3.jpeg";
 
 export default function AboutPage() {
   useEffect(() => {
@@ -47,13 +48,17 @@ export default function AboutPage() {
           <div className="md:col-span-5">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1200&q=80"
+                src={aboutBG}
                 alt="Estate"
                 className="aspect-[3/4] w-full rounded-3xl object-cover"
               />
-              <div className="absolute -bottom-6 -left-6 hidden rounded-2xl bg-card p-5 shadow-[var(--shadow-elev)] md:block">
-                <p className="font-serif text-3xl text-navy">5</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Private Estates</p>
+              <div className="absolute -bottom-6 -left-6 hidden rounded-2xl p-5 shadow-[var(--shadow-elev)] md:block backdrop-blur-md border border-white/10"
+                style={{ backgroundColor: "rgba(33,44,80,0.75)" }}
+              >
+                <p className="font-serif text-3xl text-gold">9</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-white/70">
+                  Private Estates
+                </p>
               </div>
               <div className="absolute -top-6 -right-6 hidden rounded-2xl bg-navy p-5 text-primary-foreground shadow-[var(--shadow-elev)] md:block">
                 <p className="font-serif text-3xl text-gold">200+</p>
