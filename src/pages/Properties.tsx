@@ -4,7 +4,7 @@ import { Layout } from "@/components/site/Layout";
 import { villas } from "@/data/villas";
 
 /* ─────────────────────────────────────────────
-   IMAGE CAROUSEL (self-contained, no lib)
+   IMAGE CAROUSEL
 ───────────────────────────────────────────── */
 function ImageCarousel({ images, name }: { images: string[]; name: string }) {
   const [current, setCurrent] = useState(0);
@@ -17,7 +17,9 @@ function ImageCarousel({ images, name }: { images: string[]; name: string }) {
 
   useEffect(() => {
     if (paused) return;
+
     timerRef.current = setInterval(next, 3500);
+
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
@@ -25,23 +27,47 @@ function ImageCarousel({ images, name }: { images: string[]; name: string }) {
 
   return (
     <div
-      className="relative h-full w-full overflow-hidden"
+      className="group relative h-full w-full overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       {images.map((src, i) => (
         <img
-          key={src}
+          key={`${src}-${i}`}
           src={src}
-          alt={i === 0 ? name : ""}
+          alt={i === current ? name : ""}
           loading={i === 0 ? "eager" : "lazy"}
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
-          style={{ opacity: i === current ? 1 : 0 }}
+          className="absolute inset-0 h-full w-full object-cover transition-all duration-700"
+          style={{
+            opacity: i === current ? 1 : 0,
+            transform: i === current ? "scale(1)" : "scale(1.03)",
+          }}
         />
       ))}
 
-      {/* Dot indicators */}
-      <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+      {/* Dark overlay */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(21,31,60,0.55) 0%, rgba(21,31,60,0.1) 40%, transparent 70%)",
+        }}
+      />
+
+      {/* Counter */}
+      <div
+        className="absolute right-4 top-4 rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em]"
+        style={{
+          backgroundColor: "rgba(0,0,0,0.45)",
+          color: "white",
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        {current + 1} / {images.length}
+      </div>
+
+      {/* Dots */}
+      <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-1.5">
         {images.map((_, i) => (
           <button
             key={i}
@@ -50,40 +76,72 @@ function ImageCarousel({ images, name }: { images: string[]; name: string }) {
               setCurrent(i);
             }}
             aria-label={`Image ${i + 1}`}
-            className="h-1 rounded-full transition-all duration-300"
+            className="rounded-full transition-all duration-300"
             style={{
-              width: i === current ? "20px" : "6px",
-              backgroundColor: i === current ? "var(--gold)" : "rgba(255,255,255,0.55)",
+              width: i === current ? "22px" : "7px",
+              height: "7px",
+              backgroundColor:
+                i === current
+                  ? "var(--gold)"
+                  : "rgba(255,255,255,0.55)",
             }}
           />
         ))}
       </div>
 
-      {/* Prev / Next arrows (visible on hover) */}
+      {/* Prev */}
       <button
         onClick={(e) => {
           e.preventDefault();
           setCurrent((c) => (c - 1 + images.length) % images.length);
         }}
         aria-label="Previous image"
-        className="absolute left-3 top-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-full opacity-0 transition group-hover:opacity-100"
-        style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
+        className="absolute left-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100"
+        style={{
+          backgroundColor: "rgba(255,255,255,0.88)",
+          backdropFilter: "blur(10px)",
+        }}
       >
-        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="var(--navy)" strokeWidth="2">
-          <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill="none"
+          stroke="var(--navy)"
+          strokeWidth="2"
+        >
+          <path
+            d="M15 18l-6-6 6-6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
+
+      {/* Next */}
       <button
         onClick={(e) => {
           e.preventDefault();
           setCurrent((c) => (c + 1) % images.length);
         }}
         aria-label="Next image"
-        className="absolute right-3 top-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-full opacity-0 transition group-hover:opacity-100"
-        style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
+        className="absolute right-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100"
+        style={{
+          backgroundColor: "rgba(255,255,255,0.88)",
+          backdropFilter: "blur(10px)",
+        }}
       >
-        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="var(--navy)" strokeWidth="2">
-          <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill="none"
+          stroke="var(--navy)"
+          strokeWidth="2"
+        >
+          <path
+            d="M9 18l6-6-6-6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
     </div>
@@ -98,40 +156,22 @@ function PropertyCard({ villa }: { villa: (typeof villas)[number] }) {
 
   return (
     <div
-      className="group flex flex-col overflow-hidden rounded-3xl border"
+      className="group flex flex-col overflow-hidden rounded-[32px] border transition-all duration-300"
       style={{
         backgroundColor: "var(--card)",
         borderColor: "var(--border)",
         boxShadow: "var(--shadow-soft)",
-        transition: "box-shadow 0.3s ease, transform 0.3s ease",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-elev)";
-        (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-soft)";
-        (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
       }}
     >
-      {/* Image Carousel */}
-      <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-t-3xl bg-secondary">
+      {/* Image */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
         <ImageCarousel images={villa.images} name={villa.name} />
 
-        {/* Gradient overlay */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(21,31,60,0.55) 0%, transparent 45%)",
-          }}
-        />
-
-        {/* Location badge */}
+        {/* Location */}
         <div
           className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] uppercase tracking-[0.2em]"
           style={{
-            backgroundColor: "rgba(242,237,231,0.9)",
+            backgroundColor: "rgba(242,237,231,0.92)",
             color: "var(--navy)",
             backdropFilter: "blur(8px)",
           }}
@@ -143,23 +183,38 @@ function PropertyCard({ villa }: { villa: (typeof villas)[number] }) {
           {villa.shortLocation}
         </div>
 
-        {/* Price badge */}
-        <div
-          className="absolute bottom-4 right-4 rounded-full px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.15em]"
-          style={{
-            backgroundColor: "rgba(21,31,60,0.88)",
-            color: "var(--primary-foreground)",
-            backdropFilter: "blur(8px)",
-          }}
-        >
-          ₹{villa.price.toLocaleString("en-IN")}
-          <span className="ml-1 opacity-60">/ night</span>
+        {/* Price */}
+        <div className="absolute bottom-4 right-4 flex flex-col gap-1">
+          <div
+            className="rounded-full px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em]"
+            style={{
+              backgroundColor: "rgba(21,31,60,0.88)",
+              color: "white",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            ₹{villa.price.toLocaleString("en-IN")}
+            <span className="ml-1 opacity-60">weekday</span>
+          </div>
+
+          {villa.weekendPrice && (
+            <div
+              className="rounded-full px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em]"
+              style={{
+                backgroundColor: "rgba(212,175,55,0.92)",
+                color: "var(--navy)",
+                backdropFilter: "blur(8px)",
+              }}
+            >
+              ₹{villa.weekendPrice.toLocaleString("en-IN")}
+              <span className="ml-1 opacity-70">weekend</span>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Card Body */}
+      {/* Content */}
       <div className="flex flex-1 flex-col p-6">
-        {/* Name + Tagline */}
         <div>
           <h3
             className="font-serif text-2xl leading-tight"
@@ -167,60 +222,87 @@ function PropertyCard({ villa }: { villa: (typeof villas)[number] }) {
           >
             {villa.name}
           </h3>
+
           <p
-            className="mt-1 font-serif text-sm italic"
-            style={{ color: "var(--foreground)", opacity: 0.6 }}
+            className="mt-2 font-serif text-sm italic"
+            style={{ color: "var(--foreground)", opacity: 0.62 }}
           >
             {villa.tagline}
+          </p>
+
+          {/* Description */}
+          <p
+            className="mt-4 text-sm leading-relaxed"
+            style={{ color: "var(--muted-foreground)" }}
+          >
+            {villa.description}
+          </p>
+
+          {/* Fine print */}
+          <p
+            className="mt-3 text-[11px] italic tracking-[0.04em]"
+            style={{ color: "var(--muted-foreground)", opacity: 0.8 }}
+          >
+            *Please contact us for final pricing. Rates may vary based on
+            weekends, holidays, season, and guest requirements.
           </p>
         </div>
 
         {/* Divider */}
-        <div className="my-4 h-px" style={{ backgroundColor: "var(--border)" }} />
+        <div
+          className="my-5 h-px"
+          style={{ backgroundColor: "var(--border)" }}
+        />
 
         {/* Amenities */}
-        <ul className="flex flex-wrap gap-x-4 gap-y-2">
+        <div className="flex flex-wrap gap-2">
           {previewAmenities.map((a) => (
-            <li
+            <span
               key={a}
-              className="flex items-center gap-1.5 text-xs"
-              style={{ color: "var(--muted-foreground)" }}
+              className="rounded-full px-3 py-1 text-[11px]"
+              style={{
+                backgroundColor: "var(--secondary)",
+                color: "var(--muted-foreground)",
+              }}
             >
-              <span
-                className="inline-block h-1 w-1 rounded-full"
-                style={{ backgroundColor: "var(--navy)", opacity: 0.45 }}
-              />
               {a}
-            </li>
+            </span>
           ))}
+
           {villa.amenities.length > 4 && (
-            <li
-              className="text-xs"
-              style={{ color: "var(--muted-foreground)", opacity: 0.6 }}
+            <span
+              className="rounded-full px-3 py-1 text-[11px]"
+              style={{
+                backgroundColor: "rgba(0,0,0,0.04)",
+                color: "var(--muted-foreground)",
+              }}
             >
               +{villa.amenities.length - 4} more
-            </li>
+            </span>
           )}
-        </ul>
+        </div>
 
-        {/* Stats row */}
-        <div
-          className="mt-4 flex items-center gap-5 text-xs"
-          style={{ color: "var(--muted-foreground)" }}
-        >
-          <span>{villa.bedrooms} bedrooms</span>
-          <span
-            className="h-3 w-px"
-            style={{ backgroundColor: "var(--border)" }}
-          />
-          <span>{villa.capacity}</span>
+        {/* Highlights */}
+        <div className="mt-5 flex flex-wrap gap-2">
+          {(villa.highlights || []).map((item) => (
+            <div
+              key={item}
+              className="rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.14em]"
+              style={{
+                backgroundColor: "rgba(21,31,60,0.06)",
+                color: "var(--navy)",
+              }}
+            >
+              {item}
+            </div>
+          ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-6">
+        <div className="mt-7">
           <Link
             to={`/villas/${villa.slug}`}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full py-3 text-[12px] font-medium uppercase tracking-[0.18em] transition hover:opacity-90"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[12px] font-medium uppercase tracking-[0.18em] transition-all duration-300 hover:scale-[1.01] hover:opacity-90"
             style={{
               backgroundColor: "var(--navy)",
               color: "var(--primary-foreground)",
@@ -246,7 +328,6 @@ function SearchBar({
 }) {
   return (
     <div className="relative w-full max-w-lg">
-      {/* Search icon */}
       <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2">
         <svg
           viewBox="0 0 24 24"
@@ -259,6 +340,7 @@ function SearchBar({
           <path d="M17 17l3.5 3.5" strokeLinecap="round" />
         </svg>
       </span>
+
       <input
         type="text"
         placeholder="Search by name or location…"
@@ -274,14 +356,24 @@ function SearchBar({
           "--tw-ring-color": "var(--navy)",
         }}
       />
+
       {value && (
         <button
           onClick={() => onChange("")}
           aria-label="Clear search"
           className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground transition hover:text-foreground"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+          <svg
+            viewBox="0 0 24 24"
+            className="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              strokeLinecap="round"
+            />
           </svg>
         </button>
       )}
@@ -289,17 +381,23 @@ function SearchBar({
   );
 }
 
-/* ─────────────────────────────────────────────
-   CATEGORY FILTERS
-───────────────────────────────────────────── */
-const FILTERS = ["All", "Party", "Family", "Romantic", "Heritage", "Events"] as const;
+/* ───────────────────────────────────────────── */
+const FILTERS = [
+  "All",
+  "Party",
+  "Family",
+  "Romantic",
+  "Heritage",
+  "Events",
+] as const;
 
 /* ─────────────────────────────────────────────
    PAGE
 ───────────────────────────────────────────── */
 export default function PropertiesPage() {
   const [search, setSearch] = useState("");
-  const [activeFilter, setActiveFilter] = useState<(typeof FILTERS)[number]>("All");
+  const [activeFilter, setActiveFilter] =
+    useState<(typeof FILTERS)[number]>("All");
 
   useEffect(() => {
     document.title = "Properties — Ario Stays";
@@ -313,7 +411,8 @@ export default function PropertiesPage() {
       v.shortLocation.toLowerCase().includes(search.toLowerCase());
 
     const matchesFilter =
-      activeFilter === "All" || v.category.includes(activeFilter as never);
+      activeFilter === "All" ||
+      v.category.includes(activeFilter as never);
 
     return matchesSearch && matchesFilter;
   });
@@ -321,7 +420,7 @@ export default function PropertiesPage() {
   return (
     <Layout>
       <section className="container-editorial">
-        {/* Page Header */}
+        {/* Header */}
         <div className="max-w-3xl">
           <p
             className="text-[11px] uppercase tracking-[0.3em]"
@@ -329,29 +428,36 @@ export default function PropertiesPage() {
           >
             Our Collection
           </p>
+
           <h1
             className="mt-4 font-serif text-5xl font-medium leading-[1.05] md:text-6xl"
             style={{ color: "var(--navy)" }}
           >
-            Private estates,{" "}
+            Private estates,
             <span
               className="italic"
               style={{ color: "var(--foreground)", opacity: 0.65 }}
             >
+              {" "}
               curated for you.
             </span>
           </h1>
+
           <p
             className="mt-5 max-w-xl text-base leading-relaxed"
             style={{ color: "var(--muted-foreground)" }}
           >
-            Every property is hand-picked for its character, comfort, and sense of place — from
-            heritage havelis to mango-orchard estates. Find the one that feels right.
+            Every property is hand-picked for its character, comfort, and
+            sense of place — from heritage havelis to mango-orchard estates.
+            Find the one that feels right.
           </p>
         </div>
 
-        {/* Search + Filter Bar */}
-        <div className="mt-10 flex flex-col gap-5 border-y py-6 sm:flex-row sm:items-center sm:justify-between" style={{ borderColor: "var(--border)" }}>
+        {/* Filters */}
+        <div
+          className="mt-10 flex flex-col gap-5 border-y py-6 sm:flex-row sm:items-center sm:justify-between"
+          style={{ borderColor: "var(--border)" }}
+        >
           <SearchBar value={search} onChange={setSearch} />
 
           <div className="flex flex-wrap gap-2">
@@ -359,10 +465,12 @@ export default function PropertiesPage() {
               <button
                 key={f}
                 onClick={() => setActiveFilter(f)}
-                className="rounded-full px-4 py-2 text-[12px] uppercase tracking-[0.18em] transition"
+                className="rounded-full px-4 py-2 text-[12px] uppercase tracking-[0.18em] transition-all duration-300"
                 style={{
                   backgroundColor:
-                    activeFilter === f ? "var(--navy)" : "var(--secondary)",
+                    activeFilter === f
+                      ? "var(--navy)"
+                      : "var(--secondary)",
                   color:
                     activeFilter === f
                       ? "var(--primary-foreground)"
@@ -376,7 +484,7 @@ export default function PropertiesPage() {
           </div>
         </div>
 
-        {/* Results count */}
+        {/* Count */}
         <p
           className="mt-6 text-xs uppercase tracking-[0.2em]"
           style={{ color: "var(--muted-foreground)" }}
@@ -386,7 +494,7 @@ export default function PropertiesPage() {
 
         {/* Grid */}
         {filtered.length > 0 ? (
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
+          <div className="mt-8 grid gap-8 lg:grid-cols-2">
             {filtered.map((v) => (
               <PropertyCard key={v.slug} villa={v} />
             ))}
@@ -403,15 +511,21 @@ export default function PropertiesPage() {
               <circle cx="28" cy="28" r="18" />
               <path d="M42 42l14 14" strokeLinecap="round" />
             </svg>
+
             <p
               className="font-serif text-2xl"
               style={{ color: "var(--navy)", opacity: 0.5 }}
             >
               No properties found
             </p>
-            <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
+
+            <p
+              className="text-sm"
+              style={{ color: "var(--muted-foreground)" }}
+            >
               Try a different name or clear the filters.
             </p>
+
             <button
               onClick={() => {
                 setSearch("");

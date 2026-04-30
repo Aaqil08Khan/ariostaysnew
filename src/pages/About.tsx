@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
-import aboutBG from "../assets/villas/Vrindavan — The Villa/img3.jpeg";
+import aboutBG from "../assets/villas/Vrindavan — The Villa/vr7.jpeg";
 
 export default function AboutPage() {
   useEffect(() => {

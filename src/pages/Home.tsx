@@ -86,11 +86,7 @@ export default function Home() {
 
             <div className="mt-8 grid max-w-xs grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:max-w-sm md:mt-12 md:max-w-2xl md:gap-8 md:pt-6">
               <div>
-                <p className="font-serif text-2xl text-white md:text-3xl">9</p>
-                <p className="mt-0.5 text-[9px] uppercase tracking-[0.15em] text-white/60 md:text-[10px]">Private Estates</p>
-              </div>
-              <div>
-                <p className="font-serif text-2xl text-white md:text-3xl">200+</p>
+                <p className="font-serif text-2xl text-white md:text-3xl">100K+</p>
                 <p className="mt-0.5 text-[9px] uppercase tracking-[0.15em] text-white/60 md:text-[10px]">Guests Hosted</p>
               </div>
               <div>

@@ -1,57 +1,45 @@
-import vr1 from "../assets/villas/Vrindavan — The Villa/vr1.jpeg"
-import vr2 from "../assets/villas/Vrindavan — The Villa/vr2.jpeg"
-import vr3 from "../assets/villas/Vrindavan — The Villa/vr3.jpeg"
-import vr4 from "../assets/villas/Vrindavan — The Villa/vr4.jpeg"
-import kh1 from "../assets/villas/kerela house/kh1.jpeg"
-import kh2 from "../assets/villas/kerela house/kh2.jpeg"
-import kh3 from "../assets/villas/kerela house/kh3.jpeg"
-import kh4 from "../assets/villas/kerela house/kh4.jpeg"
-import pp1 from "../assets/villas/Purple Palms Villa/pp1.jpeg"
-import pp2 from "../assets/villas/Purple Palms Villa/pp2.jpeg"
-import pp3 from "../assets/villas/Purple Palms Villa/pp3.jpeg"
-import pp4 from "../assets/villas/Purple Palms Villa/pp4.jpeg"
-import ch1 from "../assets/villas/Chandravaas — The Haveli/ch1.jpeg"
-import ch2 from "../assets/villas/Chandravaas — The Haveli/ch2.jpeg"
-import ch3 from "../assets/villas/Chandravaas — The Haveli/ch3.jpeg"
-import ch4 from "../assets/villas/Chandravaas — The Haveli/ch4.jpeg"
-import ar1 from "../assets/villas/Ario Mango Retreat/ar1.jpeg"
-import ar2 from "../assets/villas/Ario Mango Retreat/ar2.jpeg"
-import ar3 from "../assets/villas/Ario Mango Retreat/ar3.jpeg"
-import ar4 from "../assets/villas/Ario Mango Retreat/ar4.jpeg"
-import pf1 from "../assets/villas/pearl-farm-stay/pf1.jpeg"
-import pf2 from "../assets/villas/pearl-farm-stay/pf2.jpeg"
-import pf3 from "../assets/villas/pearl-farm-stay/pf3.jpeg"
-import pf4 from "../assets/villas/pearl-farm-stay/pf4.jpeg"
-import li1 from "../assets/villas/lilac-inn/li1.jpeg"
-import li2 from "../assets/villas/lilac-inn/li2.jpeg"
-import li3 from "../assets/villas/lilac-inn/li3.jpeg"
-import li4 from "../assets/villas/lilac-inn/li4.jpeg"
-// ─── Rockdale Inn ───────────────────────────────────────────────────────────
-import rd1 from "../assets/villas/rockdale-inn/rd1.jpeg"
-import rd2 from "../assets/villas/rockdale-inn/rd2.jpeg"
-import rd3 from "../assets/villas/rockdale-inn/rd3.jpeg"
-import rd4 from "../assets/villas/rockdale-inn/rd4.jpeg"
-// ─── Kaizen Farms ───────────────────────────────────────────────────────────
-import kz1 from "../assets/villas/kaizen-farms/kz1.jpeg"
-import kz2 from "../assets/villas/kaizen-farms/kz2.jpeg"
-import kz3 from "../assets/villas/kaizen-farms/kz3.jpeg"
-import kz4 from "../assets/villas/kaizen-farms/kz4.jpeg"
+import { loadVillaImages } from "@/lib/loadVillaImages";
+
+export type AmenityGroup = {
+  group: string;
+  items: string[];
+};
 
 export type Villa = {
   name: string;
   slug: string;
+
   location: string;
   shortLocation: string;
   description: string;
   amenities: string[];
+  amenityGroups?: AmenityGroup[];
+
   mapLink: string;
   mapEmbed: string;
+
+  /** weekday price */
   price: number;
+
+  /** weekend price */
+  weekendPrice?: number;
+
   capacity: string;
   bedrooms: number;
-  category: ("Party" | "Family" | "Romantic" | "Heritage" | "Events")[];
+
+  category: (
+    | "Party"
+    | "Family"
+    | "Romantic"
+    | "Heritage"
+    | "Events"
+  )[];
+
   images: string[];
   tagline: string;
+
+  /** highlights shown as icon chips */
+  highlights?: string[];
 };
 
 export const villas: Villa[] = [
@@ -60,234 +48,673 @@ export const villas: Villa[] = [
     slug: "vrindavan-the-villa",
     location: "Shamshabad, Hyderabad",
     shortLocation: "Shamshabad",
+
     tagline: "An acre of calm. Crafted for unhurried days.",
+
     description:
-      "A serene one-acre private estate designed for relaxed gatherings and long, unhurried stays. Featuring a spacious 3-bedroom home with modern comforts, expansive lawns, and thoughtfully curated outdoor spaces, Vrindavan offers the perfect balance of openness and privacy. Whether it's a quiet weekend escape or a lively evening by the pool and barbecue, every corner is crafted for comfort and connection.",
+      "A serene one-acre private estate designed for relaxed gatherings and long, unhurried stays. Set across expansive lawns with thoughtfully curated outdoor spaces, Vrindavan strikes the perfect balance of openness and privacy. Whether it's a quiet weekend escape or a lively evening by the pool and barbecue, every corner is crafted for comfort and connection.",
+
+    highlights: [
+      "Private Pool",
+      "Lawn",
+      "BBQ",
+      "Gazebo",
+      "Kids Area",
+      "Caretaker",
+    ],
+
     amenities: [
-      "3 Bedrooms with AC",
       "Private swimming pool",
-      "Fully equipped kitchen",
-      "Spacious dining area",
       "Expansive lawn",
       "BBQ & outdoor seating",
       "Gazebo",
       "Kids play area",
+      "Fully equipped kitchen",
       "Power backup",
       "On-site caretaker",
       "Pre-order food service",
+      "Air-conditioned rooms",
     ],
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Expansive lawn",
+          "Gazebo",
+          "BBQ & outdoor seating",
+          "Kids play area",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Fully equipped kitchen",
+          "Dining area",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "Power backup",
+          "On-site caretaker",
+          "Pre-order food service",
+        ],
+      },
+    ],
+
     mapLink: "https://www.google.com/maps?q=17.2403,78.4294",
-    mapEmbed: "https://www.google.com/maps?q=17.2403,78.4294&output=embed",
-    price: 24999,
-    capacity: "Up to 12 guests",
+    mapEmbed:
+      "https://www.google.com/maps?q=17.2403,78.4294&output=embed",
+
+    price: 12000,
+    weekendPrice: 18000,
+
+    capacity: "",
     bedrooms: 3,
+
     category: ["Family", "Party"],
-    images: [vr1, vr2, vr3, vr4],
+
+    images: loadVillaImages("Vrindavan — The Villa"),
   },
+
   {
     name: "Kerala House",
     slug: "kerala-house",
     location: "Hyderabad Outskirts",
     shortLocation: "Hyderabad",
+
     tagline: "Heritage Kerala soul. Modern comforts.",
+
     description:
-      "An intimate retreat inspired by traditional Kerala architecture, surrounded by lush greenery and flowering landscapes. This 2-bedroom home blends heritage charm with modern comfort, offering a peaceful atmosphere enhanced by a private pool and warm, natural textures. Ideal for slow mornings, quiet evenings, and meaningful time away from the city.",
+      "An intimate retreat inspired by traditional Kerala architecture, surrounded by lush greenery and flowering landscapes. This heritage-style home blends timeless charm with modern comfort — a private pool, warm natural textures, and a serene garden create the ideal setting for slow mornings and quiet evenings away from the city.",
+
+    highlights: [
+      "Private Pool",
+      "Garden",
+      "Bathtub",
+      "Heritage Style",
+      "Bluetooth Speaker",
+    ],
+
     amenities: [
-      "2 Bedrooms",
-      "Swimming pool",
+      "Private swimming pool",
       "Bathtub",
       "Landscaped garden",
       "Fridge & microwave",
       "Premium toiletries",
       "Linen bedding",
       "Bluetooth speaker",
+      "Air-conditioned rooms",
     ],
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: ["Private swimming pool", "Landscaped garden"],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Bathtub",
+          "Fridge & microwave",
+          "Bluetooth speaker",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Comfort",
+        items: ["Premium toiletries", "Linen bedding"],
+      },
+    ],
+
     mapLink: "https://www.google.com/maps?q=17.3850,78.4867",
-    mapEmbed: "https://www.google.com/maps?q=17.3850,78.4867&output=embed",
-    price: 18999,
-    capacity: "Up to 6 guests",
+    mapEmbed:
+      "https://www.google.com/maps?q=17.3850,78.4867&output=embed",
+
+    price: 12000,
+    weekendPrice: 18000,
+
+    capacity: "",
     bedrooms: 2,
+
     category: ["Romantic", "Family"],
-    images: [kh1, kh2, kh3, kh4],
+
+    images: loadVillaImages("kerela house"),
   },
+
   {
     name: "Purple Palms Villa",
     slug: "purple-palms-villa",
     location: "Shankarpally, Hyderabad",
     shortLocation: "Shankarpally",
+
     tagline: "Spirited weekends. Wide open spaces.",
+
     description:
-      "A vibrant and well-equipped 3-bedroom villa designed for both relaxation and recreation. With modern amenities, a private pool, and expansive outdoor areas, Purple Palms is ideal for group stays, casual celebrations, and active weekends. The space combines comfort with entertainment, making it perfect for memorable getaways.",
+      "A vibrant villa designed for both relaxation and recreation. Featuring a private pool, expansive outdoor areas, a cricket practice net, and dedicated BBQ space, Purple Palms is the go-to for group stays, casual celebrations, and active weekends. Smart interiors, modern comforts, and open grounds make every visit unforgettable.",
+
+    highlights: [
+      "Private Pool",
+      "Cricket Net",
+      "BBQ",
+      "Lawn",
+      "Smart TV",
+      "Wi-Fi",
+    ],
+
     amenities: [
-      "3 Bedrooms with extra bedding",
-      "Swimming pool",
+      "Private swimming pool",
       "Smart TV",
       "Wi-Fi",
       "Washing machine",
-      "Lawn",
+      "Expansive lawn",
       "BBQ setup",
       "Cricket practice net",
       "Toiletries & linen",
+      "Air-conditioned rooms",
     ],
-    mapLink: "https://www.google.com/maps?q=17.27781867980957,78.242919921875",
-    mapEmbed: "https://www.google.com/maps?q=17.27781867980957,78.242919921875&output=embed",
-    price: 22999,
-    capacity: "Up to 14 guests",
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Expansive lawn",
+          "BBQ setup",
+          "Cricket practice net",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Smart TV",
+          "Wi-Fi",
+          "Washing machine",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Comfort",
+        items: ["Toiletries & linen"],
+      },
+    ],
+
+    mapLink:
+      "https://www.google.com/maps?q=17.27781867980957,78.242919921875",
+
+    mapEmbed:
+      "https://www.google.com/maps?q=17.27781867980957,78.242919921875&output=embed",
+
+    price: 12000,
+    weekendPrice: 18000,
+
+    capacity: "",
     bedrooms: 3,
+
     category: ["Party", "Family"],
-    images: [pp1, pp2, pp3, pp4],
+
+    images: loadVillaImages("Purple Palms Villa"),
   },
+
   {
-    name: "Chandravaas — The Haveli",
-    slug: "chandravaas-the-haveli",
+    name: "Ivory Courtyard",
+    slug: "ivory-courtyard",
+
     location: "Heritage Estate, Telangana",
     shortLocation: "Telangana",
+
     tagline: "A haveli reimagined for the modern guest.",
+
     description:
-      "A grand haveli-style residence that captures the charm of heritage architecture with expansive spaces and timeless design. Chandravaas offers a unique stay experience rooted in tradition, ideal for those seeking character, scale, and a distinctive atmosphere for gatherings or peaceful retreats.",
+      "A grand haveli-style residence that captures the charm of heritage architecture with expansive spaces and timeless design. Traditional courtyards, curated antique interiors, and sweeping open grounds make Ivory Courtyard an estate unlike any other — ideal for those seeking character, scale, and a truly distinctive atmosphere.",
+
+    highlights: [
+      "Heritage Architecture",
+      "Grand Courtyard",
+      "Private Grounds",
+      "Curated Interiors",
+      "Event Space",
+    ],
+
     amenities: [
       "Heritage-style architecture",
-      "Large private spaces",
-      "Ideal for group stays",
-      "Traditional courtyards",
-      "Curated interiors",
+      "Grand traditional courtyard",
+      "Large private grounds",
+      "Curated antique interiors",
+      "Multiple event spaces",
+      "On-site caretaker",
+      "Power backup",
     ],
+
+    amenityGroups: [
+      {
+        group: "Architecture",
+        items: [
+          "Heritage-style architecture",
+          "Grand traditional courtyard",
+          "Curated antique interiors",
+        ],
+      },
+      {
+        group: "Outdoors",
+        items: [
+          "Large private grounds",
+          "Multiple event spaces",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "On-site caretaker",
+          "Power backup",
+        ],
+      },
+    ],
+
     mapLink: "https://www.google.com/maps?q=17.123184,79.208824",
-    mapEmbed: "https://www.google.com/maps?q=17.123184,79.208824&output=embed",
-    price: 29999,
-    capacity: "Up to 16 guests",
+
+    mapEmbed:
+      "https://www.google.com/maps?q=17.123184,79.208824&output=embed",
+
+    price: 45000,
+    weekendPrice: 50000,
+
+    capacity: "",
     bedrooms: 4,
-    category: ["Heritage", "Family"],
-    images: [ch1, ch2, ch3, ch4],
+
+    category: ["Heritage", "Family", "Events"],
+
+    images: loadVillaImages("Chandravaas — The Haveli"),
   },
+
   {
-    name: "Ario Mango Retreat — The Royal Cottage",
-    slug: "ario-mango-retreat-royal-cottage",
+    name: "Mango Retreats",
+    slug: "mango-retreats",
+
     location: "Mango Orchards, Hyderabad",
     shortLocation: "Mango Orchards",
+
     tagline: "Made for milestones. Built for grandeur.",
+
     description:
-      "A luxurious 6-bedroom estate crafted for large gatherings, celebrations, and unforgettable experiences. With its grand courtyard, expansive lawn for over 200 guests, and a stunning private pool, Mango Retreat blends elegance with scale. Perfect for events, parties, and premium getaways, it offers space, comfort, and a truly elevated stay.",
+      "A luxurious estate crafted for large gatherings, celebrations, and unforgettable experiences. A grand royal courtyard, an expansive lawn, and a stunning private pool come together to create an atmosphere of pure elegance. Perfect for events, parties, and premium getaways — this is where memories are made.",
+
+    highlights: [
+      "Private Pool",
+      "Royal Courtyard",
+      "Expansive Lawn",
+      "Event Space",
+      "Luxury Estate",
+    ],
+
     amenities: [
-      "6 Bedrooms",
       "Private swimming pool",
       "Royal courtyard",
-      "Lawn for 200+ guests",
-      "Event-friendly space",
-      "Ideal for celebrations & stays",
+      "Expansive event lawn",
+      "Fully equipped kitchen",
+      "Outdoor dining area",
+      "Power backup",
+      "On-site caretaker",
+      "Decor coordination available",
+      "Air-conditioned suites",
     ],
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Royal courtyard",
+          "Expansive event lawn",
+          "Outdoor dining area",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Fully equipped kitchen",
+          "Air-conditioned suites",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "Power backup",
+          "On-site caretaker",
+          "Decor coordination available",
+        ],
+      },
+    ],
+
     mapLink: "https://www.google.com/maps?q=17.3000,78.3000",
-    mapEmbed: "https://www.google.com/maps?q=17.3000,78.3000&output=embed",
-    price: 49999,
-    capacity: "Up to 30 guests",
+
+    mapEmbed:
+      "https://www.google.com/maps?q=17.3000,78.3000&output=embed",
+
+    price: 15000,
+    weekendPrice: 20000,
+
+    capacity: "",
     bedrooms: 6,
+
     category: ["Events", "Party"],
-    images: [ar1, ar2, ar3, ar4],
+
+    images: loadVillaImages("Ario Mango Retreat"),
   },
+
   {
-    name: "Pearl Farm Stay",
-    slug: "pearl-farm-stay",
+    name: "Pearl Farms",
+    slug: "pearl-farms",
+
     location: "Moinabad, Hyderabad",
     shortLocation: "Moinabad",
+
     tagline: "Open lawns. Quiet escapes. Simple comfort.",
+
     description:
-      "A peaceful 2BHK farmhouse ideal for relaxed getaways. With a private pool, expansive lawn, and essential comforts, Pearl Farm Stay is perfect for small gatherings, family stays, and slow weekends close to nature.",
-    amenities: [
-      "2BHK",
-      "Swimming pool",
-      "Huge lawn",
-      "Equipped kitchen",
-      "On-site caretaker",
+      "A peaceful farmhouse ideal for relaxed getaways close to nature. A private pool shimmers against a backdrop of open countryside, while a huge lawn invites lazy afternoons and breezy evenings. With a fully equipped kitchen and a dedicated on-site caretaker, every comfort is taken care of.",
+
+    highlights: [
+      "Private Pool",
+      "Huge Lawn",
+      "Equipped Kitchen",
+      "Caretaker",
+      "Nature Views",
     ],
-    mapLink: "https://www.google.com/maps?q=17.3011726,78.1968873",
-    mapEmbed: "https://www.google.com/maps?q=17.3011726,78.1968873&output=embed",
-    price: 15999,
-    capacity: "Up to 8 guests",
+
+    amenities: [
+      "Private swimming pool",
+      "Huge open lawn",
+      "Fully equipped kitchen",
+      "Dining area",
+      "On-site caretaker",
+      "Power backup",
+      "Free parking",
+      "Air-conditioned rooms",
+    ],
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Huge open lawn",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Fully equipped kitchen",
+          "Dining area",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "On-site caretaker",
+          "Power backup",
+          "Free parking",
+        ],
+      },
+    ],
+
+    mapLink:
+      "https://www.google.com/maps?q=17.3011726,78.1968873",
+
+    mapEmbed:
+      "https://www.google.com/maps?q=17.3011726,78.1968873&output=embed",
+
+    price: 18000,
+    weekendPrice: 20000,
+
+    capacity: "",
     bedrooms: 2,
+
     category: ["Family", "Party"],
-    images: [pf1, pf2, pf3, pf4],
+
+    images: loadVillaImages("pearl-farm-stay"),
   },
+
   {
     name: "Lilac Inn",
     slug: "lilac-inn",
+
     location: "Moinabad, Hyderabad",
     shortLocation: "Moinabad",
+
     tagline: "Elegant stays. Even better evenings.",
+
     description:
-      "A fully air-conditioned 4BHK farmhouse in Moinabad featuring a pool, rooftop terrace, and spacious garden. Ideal for group stays, celebrations, and relaxed evenings with music, BBQ, and bonfire experiences.",
+      "A fully air-conditioned farmhouse in Moinabad built for evenings that don't end early. A sparkling pool, rooftop terrace with open-sky views, a spacious garden, and built-in BBQ and bonfire setups make Lilac Inn perfect for group stays, celebrations, and nights filled with good music and great company.",
+
+    highlights: [
+      "Private Pool",
+      "Rooftop Terrace",
+      "BBQ",
+      "Bonfire",
+      "Music System",
+      "Garden",
+    ],
+
     amenities: [
-      "4BHK fully air-conditioned",
-      "Swimming pool",
-      "Garden area",
+      "Private swimming pool",
       "Rooftop terrace",
+      "Spacious garden",
       "BBQ setup",
       "Bonfire (on request)",
       "Music system",
+      "Equipped kitchen",
+      "Power backup",
+      "Air-conditioned rooms",
     ],
-    mapLink: "https://www.google.com/maps?q=17.2926882,78.2286994",
-    mapEmbed: "https://www.google.com/maps?q=17.2926882,78.2286994&output=embed",
-    price: 21999,
-    capacity: "Up to 12 guests",
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Rooftop terrace",
+          "Spacious garden",
+          "BBQ setup",
+          "Bonfire (on request)",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Equipped kitchen",
+          "Music system",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "Power backup",
+          "On-site caretaker",
+        ],
+      },
+    ],
+
+    mapLink:
+      "https://www.google.com/maps?q=17.2926882,78.2286994",
+
+    mapEmbed:
+      "https://www.google.com/maps?q=17.2926882,78.2286994&output=embed",
+
+    price: 13000,
+    weekendPrice: 18000,
+
+    capacity: "",
     bedrooms: 4,
+
     category: ["Party", "Events", "Family"],
-    images: [li1, li2, li3, li4],
+
+    images: loadVillaImages("lilac-inn"),
   },
+
   {
     name: "Rockdale Inn",
     slug: "rockdale-inn",
+
     location: "Kachivani Singaram, Rangareddy",
     shortLocation: "Rangareddy",
+
     tagline: "Lush greens. Cool pool. Zero noise.",
+
     description:
-      "Tucked away in the serene outskirts of Rangareddy, Rockdale Inn is a spacious farmhouse retreat offering everything you need for a comfortable, unplugged escape. With air-conditioned rooms, a sparkling private pool, a lush lawn, and a fully equipped kitchen, it's built for groups who want comfort without compromise. A power-backed setup ensures uninterrupted stays.",
+      "Tucked away in the serene outskirts of Rangareddy, Rockdale Inn is a spacious farmhouse retreat built for groups who want comfort without compromise. Air-conditioned rooms, a sparkling private pool, a lush open lawn, and a fully equipped kitchen come together in a setting where the only sounds are the ones you bring.",
+
+    highlights: [
+      "Private Pool",
+      "Lawn",
+      "AC Rooms",
+      "Equipped Kitchen",
+      "Bluetooth Speaker",
+      "Power Backup",
+    ],
+
     amenities: [
-      "Air conditioning",
-      "Private pool",
+      "Private swimming pool",
       "Expansive lawn",
-      "Equipped kitchen",
+      "Fully equipped kitchen",
       "Fridge & microwave",
       "Bluetooth speaker",
       "Power backup",
       "Free parking",
+      "Air-conditioned rooms",
     ],
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Expansive lawn",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Fully equipped kitchen",
+          "Fridge & microwave",
+          "Bluetooth speaker",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "Power backup",
+          "Free parking",
+        ],
+      },
+    ],
+
     mapLink: "https://www.google.com/maps?q=17.3560,78.2100",
-    mapEmbed: "https://www.google.com/maps?q=17.3560,78.2100&output=embed",
-    price: 19999,
-    capacity: "Up to 10 guests",
+
+    mapEmbed:
+      "https://www.google.com/maps?q=17.3560,78.2100&output=embed",
+
+    price: 14000,
+    weekendPrice: 20000,
+
+    capacity: "",
     bedrooms: 4,
+
     category: ["Family", "Party"],
-    images: [rd1, rd2, rd3, rd4],
+
+    images: loadVillaImages("rockdale-inn"),
   },
+
   {
     name: "Kaizen Farms",
     slug: "kaizen-farms",
+
     location: "Moinabad, Hyderabad",
     shortLocation: "Moinabad",
+
     tagline: "Designed for couples. Built for quiet.",
+
     description:
-      "A charming and intimate 1BHK farmhouse in the tranquil surrounds of Moinabad — crafted for couples and small families seeking a slow, private escape. With a beautiful swimming pool, a generous lawn, air conditioning, and a dedicated on-site caretaker, Kaizen Farms keeps things simple, personal, and deeply relaxing. No events, no noise — just you and the countryside.",
+      "A charming and intimate farmhouse in the tranquil surrounds of Moinabad — crafted for couples and small families seeking a slow, private escape. A beautiful private pool, a generous lawn, air conditioning throughout, and a dedicated on-site caretaker keep things personal and deeply relaxing. Pet-friendly, unhurried, and entirely yours.",
+
+    highlights: [
+      "Private Pool",
+      "Lawn",
+      "AC",
+      "Pet Friendly",
+      "Wi-Fi",
+      "Caretaker",
+    ],
+
     amenities: [
-      "1BHK",
       "Private swimming pool",
       "Lawn area",
-      "Air conditioning",
+      "Fully equipped kitchen",
       "On-site caretaker",
-      "Free parking",
-      "Pet friendly",
       "Wi-Fi",
+      "Pet friendly",
+      "Free parking",
+      "Air-conditioned rooms",
     ],
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Lawn area",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Fully equipped kitchen",
+          "Wi-Fi",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "On-site caretaker",
+          "Pet friendly",
+          "Free parking",
+        ],
+      },
+    ],
+
     mapLink: "https://www.google.com/maps?q=17.2850,78.1800",
-    mapEmbed: "https://www.google.com/maps?q=17.2850,78.1800&output=embed",
-    price: 11999,
-    capacity: "Up to 4 guests",
+
+    mapEmbed:
+      "https://www.google.com/maps?q=17.2850,78.1800&output=embed",
+
+    price: 6000,
+    weekendPrice: 8000,
+
+    capacity: "",
     bedrooms: 1,
+
     category: ["Romantic", "Family"],
-    images: [kz1, kz2, kz3, kz4],
+
+    images: loadVillaImages("kaizen-farms"),
   },
 ];
 
-export const getVilla = (slug: string) => villas.find((v) => v.slug === slug);
+export const getVilla = (slug: string) =>
+  villas.find((v) => v.slug === slug);
 
 export const WHATSAPP_URL = "https://wa.me/918317545573";
-export const PHONES = ["+91 83175 45573", "+91 93917 12789"];
-export const INSTAGRAM = "https://instagram.com/ariostays";
+
+export const PHONES = [
+  "+91 83175 45573",
+  "+91 93917 12789",
+];
+
+export const INSTAGRAM =
+  "https://instagram.com/ariostays";
