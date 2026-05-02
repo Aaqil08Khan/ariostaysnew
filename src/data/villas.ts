@@ -8,6 +8,7 @@ export type AmenityGroup = {
 export type Villa = {
   name: string;
   slug: string;
+  
 
   location: string;
   shortLocation: string;
@@ -37,6 +38,7 @@ export type Villa = {
 
   images: string[];
   tagline: string;
+  
 
   /** highlights shown as icon chips */
   highlights?: string[];
