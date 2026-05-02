@@ -634,6 +634,150 @@ export const villas: Villa[] = [
   },
 
   {
+    name: "Mango Retreat Farmhouse",
+    slug: "mango-retreat-farmhouse",
+
+    location: "Moinabad, Hyderabad",
+    shortLocation: "Moinabad",
+
+    tagline: "Lush orchards. Private pool. Pure retreat.",
+
+    description:
+      "A charming 3-bedroom farmhouse nestled amidst mango orchards, perfect for families and small groups seeking a peaceful escape. Enjoy a private swimming pool, open lawns, air-conditioned rooms, and all modern conveniences — with a dedicated on-site caretaker to ensure a seamless, unhurried stay from the moment you arrive.",
+
+    highlights: [
+      "Private Pool",
+      "Lawn",
+      "3 BHK",
+      "AC Rooms",
+      "Smart TV",
+      "Wi-Fi",
+    ],
+
+    amenities: [
+      "Private swimming pool",
+      "Expansive lawn",
+      "Fully equipped kitchen",
+      "Smart TV",
+      "Wi-Fi",
+      "Bluetooth speaker",
+      "On-site caretaker",
+      "Air-conditioned rooms",
+    ],
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Expansive lawn",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Fully equipped kitchen",
+          "Smart TV",
+          "Wi-Fi",
+          "Bluetooth speaker",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "On-site caretaker",
+        ],
+      },
+    ],
+
+    mapLink: "https://www.google.com/maps?q=17.2850,78.1900",
+    mapEmbed: "https://www.google.com/maps?q=17.2850,78.1900&output=embed",
+
+    price: 12000,
+    weekendPrice: 16000,
+
+    capacity: "",
+    bedrooms: 3,
+
+    category: ["Family", "Party"],
+
+    images: loadVillaImages("mango-retreat-farmhouse"),
+  },
+
+  {
+    name: "Royal Cottage",
+    slug: "royal-cottage",
+
+    location: "Shankarpally, Hyderabad",
+    shortLocation: "Shankarpally",
+
+    tagline: "Grand spaces. Royal comfort. Yours entirely.",
+
+    description:
+      "A magnificent 6-bedroom private estate designed for large gatherings, grand celebrations, and premium group stays. The Royal Cottage offers sweeping lawns, a sparkling private pool, fully air-conditioned suites, and every modern comfort — all backed by an on-site caretaker who ensures your stay is nothing short of exceptional.",
+
+    highlights: [
+      "Private Pool",
+      "Lawn",
+      "6 BHK",
+      "AC Rooms",
+      "Smart TV",
+      "Wi-Fi",
+    ],
+
+    amenities: [
+      "Private swimming pool",
+      "Expansive lawn",
+      "Fully equipped kitchen",
+      "Smart TV",
+      "Wi-Fi",
+      "Bluetooth speaker",
+      "On-site caretaker",
+      "Air-conditioned rooms",
+    ],
+
+    amenityGroups: [
+      {
+        group: "Outdoors",
+        items: [
+          "Private swimming pool",
+          "Expansive lawn",
+        ],
+      },
+      {
+        group: "Indoors",
+        items: [
+          "Fully equipped kitchen",
+          "Smart TV",
+          "Wi-Fi",
+          "Bluetooth speaker",
+          "Air-conditioned rooms",
+        ],
+      },
+      {
+        group: "Services",
+        items: [
+          "On-site caretaker",
+        ],
+      },
+    ],
+
+    mapLink: "https://www.google.com/maps?q=17.2780,78.2430",
+    mapEmbed: "https://www.google.com/maps?q=17.2780,78.2430&output=embed",
+
+    price: 25000,
+    weekendPrice: 32000,
+
+    capacity: "",
+    bedrooms: 6,
+
+    category: ["Family", "Party", "Events"],
+
+    images: loadVillaImages("royal-cottage"),
+  },
+
+  {
     name: "Kaizen Farms",
     slug: "kaizen-farms",
 
